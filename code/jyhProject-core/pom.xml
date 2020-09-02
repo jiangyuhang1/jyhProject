@@ -1,1 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+		<groupId>org.jyhProject</groupId>
+		<artifactId>jyhProject-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+	<!-- 继承了父类的groupId和version -->
+    <artifactId>jyhProject-core</artifactId>
+    <name>jyhProject-core</name>
+    <!-- <url>http://dmpp.iwhalecloud.com</url> -->
+
+	<!--可以定义一些标签属性，在xml里面引用 -->
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.spring.version>4.3.7.RELEASE</project.spring.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-beans</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <!-- 可以使用properties中自定义的标签 -->
+            <version>${project.spring.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+		<!-- 资源文件build路径-->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+		<!-- build默认指令，build路径，build后的文件名-->
+		<defaultGoal>package</defaultGoal>  
+		<directory>${basedir}/target</directory>  
+        <finalName>${artifactId}-${version}</finalName> 
+    </build>
+</project>
 

@@ -1,1 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 父类pom抽取子模块依赖的公共部分 -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<!-- 子模块 -->
+	<modules>
+		<module>jyhProject-core</module>
+		<module>jyhProject-web</module>
+	</modules>
+
+	<!-- GAV MAVEN坐标，必须配置 -->
+	<groupId>org.jyhProject</groupId>
+	<artifactId>jyhProject-parent</artifactId>
+	<version>1.0.0</version>
+	
+	<!-- 打包类型，默认jar,所有带子模块的打包类型都是pom,maven build parent时会根据子模块的依赖顺序进行编译打包 -->
+	<packaging>pom</packaging>
+	<name>jyhProject-parent</name>
+	<description>jyhProject</description>
+	<!-- <url>http://dmpp.iwhalecloud.com</url> -->
+
+	<!--依赖具有传递性，如果依赖的路径中有相同的版本，遵循两个原则，路径最优者优先，如果路径长度相同，第一声明优先 -->
+	<!--放在这里的标签父类和子类模块都会依赖，适用于放所有模块都要依赖的项目-->
+	<dependencies>
+	</dependencies>
+
+	<!-- 依赖管理的标签 放在这里面的依赖不会被读取，当子模块要使用时，引用不需要版本号-->
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>4.3.7.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>4.3.7.RELEASE</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>4.3.7.RELEASE</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<!-- 执行build任务时，没有具体任务时将执行默认值 一般有mvn clean;mvn compile;mvn test;mvn package; mvn install-->
+		<defaultGoal>compile</defaultGoal>
+	</build>
+</project>
 
