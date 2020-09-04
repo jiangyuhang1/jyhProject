@@ -9,8 +9,8 @@
     <!-- 默认scope是singleton -->
     <!-- lazy-init默认false,默认在装配文件时实例化，true代表在在产生bean时菜实例化
     该属性可以用在beans页签下，代表所有的bean都会在产生时实例化-->
-    <bean id="person" class="com.jyh.spring.springBean.Person" scope="prototype"
-    lazy-init="true">
+    <bean id="person" class="com.jyh.spring.bean.Person" scope="prototype"
+          lazy-init="true">
         <!-- 如果通过构造有参的构造函数申明，实体类不显示的定义无参构造方法也不会有问题
         <constructor-arg name="personName" value="jiangyuhang"></constructor-arg>
         <constructor-arg name="personAge" value="26"></constructor-arg> -->
@@ -20,13 +20,13 @@
     </bean>
 
     <!-- 构造函数注入 -->
-    <bean id="family" class="com.jyh.spring.springBean.Family">
+    <bean id="family" class="com.jyh.spring.bean.Family">
         <constructor-arg name="familyName" value="hefei"></constructor-arg>
         <constructor-arg name="person" ref="person"></constructor-arg>
     </bean>
 
     <!-- 集合注入 -->
-    <bean id="collectionClass" class="com.jyh.spring.springBean.CollectionClass">
+    <bean id="collectionClass" class="com.jyh.spring.bean.CollectionClass">
         <property name="list">
             <list value-type="java.lang.String">
             <value>list1</value>
@@ -36,7 +36,7 @@
         <property name="map">
             <map>
                 <entry key-ref="family">
-                    <bean class="com.jyh.spring.springBean.Person">
+                    <bean class="com.jyh.spring.bean.Person">
                         <property name="personAge" value="111"></property>
                         <property name="personName" value="zhangsan"></property>
                     </bean>
@@ -53,16 +53,16 @@
 
     <!-- 如果是静态的工厂方法，直接在配置类的bean上面可以直接指定，如果非静态方法，需要先bean,后配置工厂方法 -->
     <!-- 前者属于静态工厂， 后者属于动态工厂 -->
-    <bean id="singletonClass" class="com.jyh.spring.springBean.SingletonClass" factory-method="getInstance"></bean>
-    <bean id="singletonClass1" class="com.jyh.spring.springBean.SingletonClass1"></bean>
+    <bean id="singletonClass" class="com.jyh.spring.bean.SingletonClass" factory-method="getInstance"></bean>
+    <bean id="singletonClass1" class="com.jyh.spring.bean.SingletonClass1"></bean>
     <bean id="dynamicFactory" factory-bean="singletonClass1" factory-method="getInstance"></bean>
 
     <!-- 在bean加载的时候可以执行一些方法 先静态代码块，构造器，init方法 -->
     <!-- 在prototype模式下，destory方法不会执行 -->
-    <bean id="emptyClass" lazy-init="true" scope="prototype" class="com.jyh.spring.springBean.EmptyClass" init-method="init" destroy-method="destory"></bean>
+    <bean id="emptyClass" lazy-init="true" scope="prototype" class="com.jyh.spring.bean.EmptyClass" init-method="init" destroy-method="destory"></bean>
 
     <!-- 表示父子结构的类bean配置方式，父类可以是类，也可以是接口 -->
-    <bean id="abstractClass" class="com.jyh.spring.springBean.AbstractClass" abstract="true"></bean>
-    <bean id="emptyInterface" class="com.jyh.spring.springBean.EmptyInterface" abstract="true"></bean>
-    <bean id="implClass" class="com.jyh.spring.springBean.ImplClass" parent="abstractClass"></bean>
+    <bean id="abstractClass" class="com.jyh.spring.bean.AbstractClass" abstract="true"></bean>
+    <bean id="emptyInterface" class="com.jyh.spring.bean.EmptyInterface" abstract="true"></bean>
+    <bean id="implClass" class="com.jyh.spring.bean.ImplClass" parent="abstractClass"></bean>
 </beans>

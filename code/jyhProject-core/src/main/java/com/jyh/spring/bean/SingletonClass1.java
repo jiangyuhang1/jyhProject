@@ -1,4 +1,4 @@
-package com.jyh.spring.springBean;
+package com.jyh.spring.bean;
 
 public class SingletonClass1 {
     //SingletonClass1 instance = new SingletonClass1();

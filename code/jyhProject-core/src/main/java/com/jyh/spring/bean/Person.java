@@ -1,4 +1,4 @@
-package com.jyh.spring.springBean;
+package com.jyh.spring.bean;
 
 public class Person {
     private String     personName; // 人的名字
