@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop-4.2.xsd">
+
+    <bean id="helloWorldImpl1" class="com.jyh.spring.aop.HelloWorldImpl1"></bean>
+    <bean id="helloWorldImpl2" class="com.jyh.spring.aop.HelloWorldImpl2"></bean>
+    <bean id="timeHandler" class="com.jyh.spring.aop.TimeHandler"></bean>
+    <bean id="logHandler" class="com.jyh.spring.aop.LogHandler"></bean>
+
+    <!-- 对切入点定义的表达式下面的所有方法进行拦截，可以在方法执行前后去执行切面内定义的方法 -->
+    <aop:config>
+        <!-- 切面 -->
+        <aop:aspect id="time" ref="timeHandler" order="1">
+            <!-- 切入点 -->
+            <!-- 表达式为HelloWorld这个接口下所有的方法 -->
+            <!-- 连接点进行拦截的定义 -->
+            <aop:pointcut id="addAllMethod" expression="execution(* com.jyh.spring.aop.HelloWorld.*(..))" />
+            <aop:before method="printTime" pointcut-ref="addAllMethod"></aop:before>
+            <aop:after method="printTime" pointcut-ref="addAllMethod"></aop:after>
+        </aop:aspect>
+        <aop:aspect id="log" ref="logHandler" order="2">
+            <aop:pointcut id="addMethod" expression="execution(* com.jyh.spring.aop.HelloWorld.printHelloWorld(..))" />
+            <aop:before method="LogBefore" pointcut-ref="addMethod"></aop:before>
+            <aop:after method="LogAfter" pointcut-ref="addMethod"></aop:after>
+        </aop:aspect>
+    </aop:config>
+</beans>
