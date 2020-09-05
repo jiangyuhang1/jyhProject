@@ -35,10 +35,24 @@
             <!-- 可以使用properties中自定义的标签 -->
             <version>${project.spring.version}</version>
         </dependency>
+        <!-- aop依赖jar -->
         <dependency>
             <groupId>org.aspectj</groupId>
             <artifactId>aspectjweaver</artifactId>
             <version>1.6.8</version>
+        </dependency>
+
+        <!-- spring jdbc依赖jar包 -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+            <version>4.1.4.RELEASE</version>
+        </dependency>
+        <!-- spring jdbc依赖jar包 -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.34</version>
         </dependency>
     </dependencies>
 

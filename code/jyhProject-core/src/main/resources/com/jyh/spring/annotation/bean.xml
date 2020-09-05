@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-4.2.xsd"
+       default-autowire="byType">
+
+    <!-- 使用注解，会在配置的路径下全盘扫描注解 -->
+    <context:component-scan base-package="com.jyh.spring.annotation"></context:component-scan>
+
+
+    <!-- 这里的实例bean可以通过注解@service去除
+    <bean id="tiger" class="com.jyh.spring.annotation.Tiger"></bean>
+    <bean id="monkey" class="com.jyh.spring.annotation.Monkey"></bean> -->
+
+    <!-- 这里的实例bean可以通过注解@service去除
+    <bean id="zoo" class="com.jyh.spring.annotation.Zoo">
+        如果使用了自动装配的注解@Autowired，那么就不需要setter注入了
+        如果java文件使用了@Autowired,去掉了set方法，那么这里的setter注入要去掉，不然会报错
+        实例bean优先走xml的setter注入
+
+        <property name="monkey" ref="monkey"></property>
+        <property name="tiger" ref="tiger"></property>
+    </bean> -->
+</beans>
