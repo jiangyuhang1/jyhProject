@@ -1,0 +1,18 @@
+#windows mysql
+
+mysqld --install
+mysql --remove
+#初始化获取root密码
+mysqld --initialize --user=root --console
+#启动或者关闭mysql
+net start mysql
+net stop mysql
+#登陆mysql
+mysql -u用户名 -p密码
+#设置密码，在登陆状态下
+set password = password(新密码);
+#退出
+exit
+#登陆root用户添加新用户
+grant 权限 on 数据库.表 to 用户名@'IP地址' identified by '密码'
+grant all on *.* to test@'%' identified by'test'
