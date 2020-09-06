@@ -14,7 +14,7 @@ public class AnnotationMain {
         String tigerName = zoo.getTiger().toString();
         System.out.println(tigerName);
 
-        ZZoo zzoo = (ZZoo)ac.getBean("ZZoo");
+        ZZoo zzoo = (ZZoo)ac.getBean("zzoo");
         System.out.println(zzoo.toString());
     }
 }

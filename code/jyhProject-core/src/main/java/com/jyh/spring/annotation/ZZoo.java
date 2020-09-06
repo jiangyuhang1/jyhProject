@@ -4,7 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 //首字母出现连续的大写字母，生成的bean id将和类名一致
-@Service
+//也可以通过自定义bean生成的id是啥
+@Service("zzoo")
 public class ZZoo {
 
     @Autowired

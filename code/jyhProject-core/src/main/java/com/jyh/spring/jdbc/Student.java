@@ -1,12 +1,12 @@
 package com.jyh.spring.jdbc;
 
 public class Student {
-    private int        studentId;
+    private Integer        studentId;
     private String    studentName;
-    private int        studentAge;
+    private Integer        studentAge;
     private String    studentPhone;
 
-    public Student(int studentId, String studentName, int studentAge,
+    public Student(Integer studentId, String studentName, Integer studentAge,
                    String studentPhone) {
         this.studentId = studentId;
         this.studentName = studentName;
@@ -14,7 +14,7 @@ public class Student {
         this.studentPhone = studentPhone;
     }
 
-    public int getStudentId() {
+    public Integer getStudentId() {
         return studentId;
     }
 
@@ -22,7 +22,7 @@ public class Student {
         return studentName;
     }
 
-    public int getStudentAge() {
+    public Integer getStudentAge() {
         return studentAge;
     }
 
