@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- logback会按照如下顺序加载 -->
+<!-- 在系统配置文件System Properties中寻找是否有logback.configurationFile对应的value -->
+<!-- 在classpath下寻找logback.groovy -->
+<!-- 在classpath下寻找logback-test.xml -->
+<!-- 在classpath下寻找logback.xml -->
+<!-- logback会调用ch.qos.logback.classic.BasicConfigurator的configure方法，
+构造一个ConsoleAppender用于向控制台输出日志 -->
+<!-- scan 为 true 配置文件发生改变，将会被重新加载 -->
+<!-- scanPeriod 扫描配置文件时间间隔 -->
+<!-- debug是否打印logback自身日志 -->
+<configuration scan="false" scanPeriod="60000" debug="false">
+    <!-- 日志打印方式 -->
+    <!-- 将日志打印到控制台 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </layout>
+        <!-- 可以对日志在打印的时候在做一层过滤 级别过滤-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <!-- 匹配warn接受 -->
+            <onMatch>ACCEPT</onMatch>
+            <!-- 不匹配warn拒绝 -->
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <!-- 将小于配置的级别全部过滤 -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+    </appender>
+
+    <!-- 向文件中写日志 -->
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>D:/123.log</file>
+        <!-- 日志追加到文件后面，false清空文件-->
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- RollingFileAppender的作用是滚动记录文件，先将日志记录到指定文件，当符合某个条件时再将日志记录到其他文件 -->
+    <appender name="ROLLING-FILE-1" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 滚动策略 TimeBasedRollingPolicy按照时间策略滚动，可以指定文件名，和保存的历史 -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>rolling-file-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <!-- encoder将日志信息转成字节数组，写入输出流 -->
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- 异步输出 -->
+    <appender name ="ASYNC" class= "ch.qos.logback.classic.AsyncAppender">
+        <!-- 不丢失日志.默认的,如果队列的80%已满,则会丢弃TRACT、DEBUG、INFO级别的日志
+        多少数值就代表还剩多少容量丢失低级别日志打印 -->
+        <discardingThreshold>0</discardingThreshold>
+        <!-- 更改默认的队列的深度,该值会影响性能.默认值为256 -->
+        <queueSize>256</queueSize>
+        <!-- 添加附加的appender,最多只能添加一个 -->
+        <appender-ref ref ="ROLLING-FILE-1"/>
+    </appender>
+
+
+    <!-- 根节点logger,name默认Root,只可配置level属性 -->
+    <!-- 日志打印会从配置的级别开始，把高于配置级别的日志都打印出来 -->
+    <root level="info">
+        <appender-ref ref="STDOUT" />
+    </root>
+
+    <!-- name配置的是类名或者包名，例如java就是java.lang的父类 ,additivity表示日志打印是否会向父类传递-->
+    <!-- 如果子标签没有配置level和 appender-ref的时候，additivity是true可以继承父类的级别与打印方式 -->
+    <logger name="com" level="error" additivity="false">
+        <appender-ref ref="STDOUT" />
+    </logger>
+
+    <!-- 子类向父类传递的过程时，如果都能打印的话，会打印两遍，级别以子类为主，子类没有级别，继承父类 -->
+    <logger name="com.jyh" level="warn" additivity="false">
+        <appender-ref ref="ROLLING-FILE-1" />
+    </logger>
+
+</configuration>
