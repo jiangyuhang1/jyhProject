@@ -25,14 +25,21 @@ public class TestSynchronized {
         System.out.println(flag + " = " + num);
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) throws Exception{
         //synchronized 持有的是对象锁
         TestSynchronized ts = new TestSynchronized();
         //TestSynchronized ts1 = new TestSynchronized();
         TestSynchronizedThread1 tst1 = new TestSynchronizedThread1(ts);
         TestSynchronizedThread2 tst2 = new TestSynchronizedThread2(ts);
         tst1.start();
+
+        //测试主内存的变量值，证明synchronized具有可见性，可以保证线程的工作内存和主内存中值一致
+        Thread.sleep(2000);
+        System.out.println(ts.num);
+
         tst2.start();
+        Thread.sleep(2000);
+        System.out.println(ts.num);
     }
 }
 
