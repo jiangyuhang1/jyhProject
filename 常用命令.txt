@@ -16,3 +16,10 @@ exit
 #登陆root用户添加新用户
 grant 权限 on 数据库.表 to 用户名@'IP地址' identified by '密码'
 grant all on *.* to test@'%' identified by'test'
+
+
+
+#查看JVM进程pid
+jps
+#打印堆栈
+jstack pid
