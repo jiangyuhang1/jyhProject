@@ -9,8 +9,8 @@ public class TestJoin extends Thread{
     @Override
     public void run() {
         try {
-            System.out.println(this.getName());
             Thread.sleep(5000);
+            System.out.println(this.getName());
         }catch (InterruptedException e){
             e.printStackTrace();
         }
@@ -20,9 +20,9 @@ public class TestJoin extends Thread{
         TestJoin tj = new TestJoin();
         tj.start();
         try {
-            //tj.join();
+            tj.join();
             //阻塞2秒
-            tj.join(2000);
+            //tj.join(2000);
         }catch (InterruptedException e){
             e.printStackTrace();
         }
