@@ -2,6 +2,7 @@ package com.jyh.multiThread.createThread;
 
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import java.util.concurrent.FutureTask;
 
 //这种线程方式有返回值
@@ -19,12 +20,16 @@ public class CallableDemo implements Callable<Integer> {
     public static void main(String[] args){
         CallableDemo cd = new CallableDemo();
         FutureTask<Integer> ft = new FutureTask<>(cd);
+        //Future<Integer> ft = new FutureTask<>(cd);
 
         //main主线程
         for(int i = 0; i < 10; i++){
             System.out.println(Thread.currentThread().getName()+" 的循环变量i的值"+i);
             if(i == 2){
                 //子线程
+                /**
+                 * 这里之所以能用FutureTask的对象去实例一个Thread,是因为FutureTask间接实现了Runnable接口
+                 */
                 new Thread(ft,"有返回值的线程").start();
             }
         }
