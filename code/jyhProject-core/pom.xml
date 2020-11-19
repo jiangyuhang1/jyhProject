@@ -203,6 +203,19 @@
             <version>19.0</version>
         </dependency>
 
+        <!-- 代码生成包，可实现动态代理，广泛应用于AOP框架使用，提供方法的拦截 -->
+        <!-- 依赖于asm包，是一种直接操作字节码框架 -->
+        <dependency>
+            <groupId>cglib</groupId>
+            <artifactId>cglib</artifactId>
+            <version>3.2.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>asm</groupId>
+            <artifactId>asm-util</artifactId>
+            <version>3.1</version>
+        </dependency>
     </dependencies>
 
     <build>
