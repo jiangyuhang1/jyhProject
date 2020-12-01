@@ -1,5 +1,4 @@
-#windows mysql
-
+#####windows mysql
 mysqld --install
 mysql --remove
 #初始化获取root密码
@@ -19,7 +18,29 @@ grant all on *.* to test@'%' identified by'test'
 
 
 
-#查看JVM进程pid
+#####查看JVM进程pid
 jps
 #打印堆栈
 jstack pid
+
+
+
+######关于jvm性能调优的指令记录
+#1.查看用户下所有进程,进程id,进程配置详情
+ps -ef|grep oss_base
+
+#2.jvm参数配置在tomcat的bin目录下catalina.sh
+
+#3.查看Eden区,Survivor区,Old区空间,YGC,FGC次数，以及YGCT,YGCT时间
+jstat -gcutil <pid> 100 1000 > a.text(代表采集1000次，每次间隔100ms)
+jstat -gc <pid> 可以打印更详细的gc情况
+
+#4.查看对象镜像日志，即打印jvm dump文件,还可以在tomcat的启动日志脚本catalina.sh启用dump日志打印
+jmap -histo <pid>
+jmap -heap <pid> 打印当前jvm中堆参数配置，新生代，老年代内存大小使用情况
+
+#5.jinfo可以查询jvm运行参数
+jinfo <pid>
+
+#6打开可视化工具,在服务器上面找到jdk的安装目录,找到bin目录
+./jvisualvm   或者  ./jconsole
