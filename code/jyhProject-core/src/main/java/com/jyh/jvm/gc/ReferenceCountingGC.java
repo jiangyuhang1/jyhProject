@@ -6,6 +6,13 @@ package com.jyh.jvm.gc;
  *  2.事实上被回收了，证明不是通过引用计数法来查找回收对象，这种方式会导致互相引用的对象永远不会回收
  *  虚拟机参数：-verbose:打印粗略的gc信息
  *           -XX:+PrintGCDetails:打印详细的gc信息
+ *           -XX:+UseSerialGC(Serial + Serial Old)
+ *           -XX:+UseParNewGC(ParNew + Serial Old)
+ *           -XX:+UseParallelGC(Parallel + Parallel Old)
+ *           -XX:+UseParallelOldGC(Parallel + Parallel Old)
+ *           -XX:+UseConcMarkSweepGC(ParNew + CMS)
+ *           -XX:+UseConcMarkSweepGC 和 -XX:-UseParNewGC(Serial + CMS)
+ *
  */
 public class ReferenceCountingGC {
 
