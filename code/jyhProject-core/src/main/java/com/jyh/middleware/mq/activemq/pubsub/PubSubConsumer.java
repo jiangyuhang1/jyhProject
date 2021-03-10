@@ -11,7 +11,11 @@ import java.io.IOException;
 public class PubSubConsumer {
 
     public static void main(String[] args) {
-        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616");
+        /**
+         * 可以通过?jms.optimizeAcknowledge=true&jms.optimizeAcknowledgeTimeOut=10000设置批量确认
+         * 默认一次确认0.65*prefetchSize数量的消息
+         */
+        ConnectionFactory connectionFactory = new ActiveMQConnectionFactory("tcp://localhost:61616?jms.optimizeAcknowledge=true&jms.optimizeAcknowledgeTimeOut=10000");
 
         Connection connection = null;
         try{
@@ -32,8 +36,9 @@ public class PubSubConsumer {
 
             /**
              * 第三步创建消费者获取消息的来源地
+             * 可以通过?consumer.prefetchSize来设置消费端批量加载的数据
              */
-            Destination destination = session.createTopic("testTopic");
+            Destination destination = session.createTopic("testTopic?consumer.prefetchSize=10");
 
             /**
              * 第四步创建消费者
